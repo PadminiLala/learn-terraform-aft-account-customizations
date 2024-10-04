@@ -15,14 +15,11 @@ data "aws_ssm_parameters_by_path" "infoblox_parms" {
   with_decryption = true
   path  = "/infoblox"
 }
-locals {
-  infoblox_params = { for param in data.aws_ssm_parameters_by_path.infoblox_params.parameters : param.name => param.value }
-}
-
 
 provider "infoblox" {
   server = "34.199.124.91"
   username = "admin"
-  password = data.aws_ssm_parameter.infoblox_password.value
+  password = data.aws_ssm_parameters_by_path.infoblox_parms.value
   sslmode = false
 }
+
