@@ -39,7 +39,3 @@ variable "availability_zones" {
 variable "reserve_ip" {
     default = "3"
 }
-# variable "subnet_az_map" {
-#   description = "A map of subnets to availability zones"
-#   type        = map(string)
-# }
