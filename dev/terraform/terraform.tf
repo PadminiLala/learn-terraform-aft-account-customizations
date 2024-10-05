@@ -12,14 +12,14 @@ terraform {
   }
 }
 
-data "aws_ssm_parameters_by_path" "infoblox_parms" {
-  with_decryption = true
-  path  = "/infoblox"
-}
-
 provider "infoblox" {
   server = "34.199.124.91"
   username = "admin"
   password = data.aws_ssm_parameters_by_path.infoblox_parms.values
   sslmode = false
+}
+data "aws_ssm_parameters_by_path" "infoblox_parms" {
+  path            = "/aft/infoblox"
+  with_decryption = true
+  recursive       = true
 }
