@@ -17,6 +17,10 @@ provider "infoblox" {
   password = local.password
   sslmode = false
 }
+data "aws_caller_identity" "current" {}
+output "account_id" {
+  value = data.aws_caller_identity.current.account_id
+}
 data "aws_ssm_parameters_by_path" "infoblox_parms" {
   path            = "/aft/infoblox"
   with_decryption = true
