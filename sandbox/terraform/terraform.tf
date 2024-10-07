@@ -14,7 +14,7 @@ terraform {
 provider "infoblox" {
   server = "34.199.124.91"
   username = "admin"
-  password = data.aws_ssm_parameters_by_path.infoblox_parms.values[0]
+  password = data.aws_ssm_parameters_by_path.infoblox_parms.infoblox_password
   sslmode = false
 }
 data "aws_ssm_parameters_by_path" "infoblox_parms" {
