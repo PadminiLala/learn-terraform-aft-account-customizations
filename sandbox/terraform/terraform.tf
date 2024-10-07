@@ -23,6 +23,7 @@ data "aws_ssm_parameters_by_path" "infoblox_parms" {
   recursive       = true
 }
 
+
 output "sensitive_example_hash" {
   value = nonsensitive(data.aws_ssm_parameters_by_path.infoblox_parms.values)
 }
