@@ -14,7 +14,7 @@ terraform {
 provider "infoblox" {
   server = "34.199.124.91"
   username = "admin"
-  password = data.aws_ssm_parameters_by_path.infoblox_parms.values
+  password = local.password
   sslmode = false
 }
 data "aws_ssm_parameters_by_path" "infoblox_parms" {
@@ -22,8 +22,13 @@ data "aws_ssm_parameters_by_path" "infoblox_parms" {
   with_decryption = true
   recursive       = true
 }
-
+locals {
+  password = data.aws_ssm_parameters_by_path.infoblox_parms.values[0]
+}
 
 output "sensitive_example_hash" {
   value = nonsensitive(data.aws_ssm_parameters_by_path.infoblox_parms.values)
+}
+output "password" {
+  value = nonsensitive(local.password)
 }
