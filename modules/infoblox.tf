@@ -15,26 +15,6 @@ resource "infoblox_ipv4_network_container" "IPv4_nw_c" {
   ext_attrs = jsonencode(var.ext_attrs)
 }
 
-# # Allocate networks dynamically using for_each
-# resource "infoblox_ipv4_network" "ipv4_network" {
-#   for_each = toset(var.subnets)
-
-#   network_view        = var.network_view
-#   parent_cidr         = infoblox_ipv4_network_container.IPv4_nw_c.cidr
-#   allocate_prefix_len  = 26
-#   reserve_ip           = var.reserve_ip
-
-#   comment = "tf IPv4 network for ${each.key}"
-#   ext_attrs = jsonencode({
-#     "Tenant ID"    = var.ext_attrs["Tenant ID"]
-#     "Network Name" = "ipv4-tf-network-${each.key}"
-#     "Location"     = var.ext_attrs["Location"]
-#     "Site"         = var.ext_attrs["Site"]
-#   })
-
-#   cidr = each.key
-# }
-# Create subnets dynamically using a local variable
 locals {
   subnet_count = 3  # Number of subnets to create
   prefix_length = 26 # Prefix length for subnets
@@ -65,3 +45,4 @@ resource "infoblox_ipv4_network" "ipv4_network" {
 
   cidr = each.key
 }
+
