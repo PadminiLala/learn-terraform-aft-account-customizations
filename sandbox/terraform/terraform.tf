@@ -22,7 +22,7 @@ output "account_id" {
   value = data.aws_caller_identity.current.account_id
 }
 data "aws_ssm_parameter" "infoblox_parms" {
-  name = "arn:aws:ram:us-east-1:311141548586:resource-share/bec6066b-4af9-4ee0-af82-34f3d072033c"
+  name = "arn:aws:ssm:us-east-1:311141548586:parameter/aft/infoblox/infoblox_password"
 }
 # locals {
 #   password = data.aws_ssm_parameter.infoblox_parms.value[0]
