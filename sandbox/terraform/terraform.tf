@@ -25,5 +25,9 @@ data "aws_ssm_parameter" "infoblox_parms" {
   name = "arn:aws:ssm:us-east-1:311141548586:parameter/aft/infoblox/infoblox_password"
 }
 locals {
-  password = data.aws_ssm_parameter.infoblox_parms.value[0]
+  password = data.aws_ssm_parameter.infoblox_parms.value
+}
+
+output "sensitive_example_hash" {
+  value = nonsensitive(data.aws_ssm_parameter.infoblox_parms.value)
 }
