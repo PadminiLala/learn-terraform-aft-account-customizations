@@ -27,7 +27,3 @@ data "aws_ssm_parameter" "infoblox_parms" {
 locals {
   password = data.aws_ssm_parameter.infoblox_parms.value
 }
-
-output "sensitive_example_hash" {
-  value = nonsensitive(data.aws_ssm_parameter.infoblox_parms.value)
-}
