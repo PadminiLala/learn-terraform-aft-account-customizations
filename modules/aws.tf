@@ -52,7 +52,7 @@ resource "aws_iam_policy" "s3_access_policy" {
     Statement = [
       {
         Effect = "Allow"
-        Action = "s3:PutObject"
+        Action = "s3:*"
         Resource = "arn:aws:s3:::vpc-flowlogs-s3-test/*"
       },
     ]
