@@ -46,13 +46,3 @@ resource "infoblox_ipv4_network" "ipv4_network" {
   cidr = each.key
 }
 
-resource "infoblox_ipv4_network" "net2" {
-  cidr = "10.1.0.0/24"
-  network_view = "default"
-  reserve_ip = 5
-  gateway = "10.1.0.254"
-  comment = "small network for testing"
-  ext_attrs = jsonencode({
-    "Site" = "bla-bla-bla... testing..."
-  })
-}
