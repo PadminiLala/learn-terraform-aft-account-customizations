@@ -57,7 +57,7 @@ resource "aws_iam_role_policy_attachment" "attach_flow_logs_policy" {
   policy_arn = aws_iam_policy.s3_access_policy.arn
 }
 
-resource "aws_vpc_flow_log" "example" {
+resource "aws_flow_log" "example" {
   traffic_type = "ALL"
   vpc_id = module.vpc.vpc_id 
   iam_role_arn = aws_iam_role.vpc_flow_logs_role.arn
