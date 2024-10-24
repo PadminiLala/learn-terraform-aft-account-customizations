@@ -34,7 +34,7 @@ resource "aws_iam_role" "vpc_flow_logs_role" {
       {
         Action    = "sts:AssumeRole"
         Principal = {
-          Service = "vpc-flow-logs.amazonaws.com"
+          AWS = "vpc-flow-logs.amazonaws.com"
         }
         Effect    = "Allow"
         Sid       = ""
@@ -67,7 +67,11 @@ resource "aws_iam_role_policy_attachment" "attach_flow_logs_policy" {
 resource "aws_flow_log" "example" {
   traffic_type = "ALL"
   vpc_id = aws_vpc.vpc.id
-  iam_role_arn = aws_iam_role.vpc_flow_logs_role.arn
+  # iam_role_arn = aws_iam_role.vpc_flow_logs_role.arn
   log_destination_type = "s3"
   log_destination = "arn:aws:s3:::vpc-flowlogs-s3-test"
+  destination_options {
+    file_format        = "plain-text"
+    per_hour_partition = true
+  }
 }
