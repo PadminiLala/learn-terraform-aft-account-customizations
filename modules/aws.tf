@@ -22,3 +22,6 @@ resource "aws_subnet" "subnet" {
     Subnet = "tf-subnet-${each.key}"
   }
 }
+output "vpc_id" {
+  value = aws_vpc.vpc.id
+}
