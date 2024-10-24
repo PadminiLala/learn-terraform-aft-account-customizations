@@ -34,7 +34,7 @@ resource "aws_iam_role" "vpc_flow_logs_role" {
       {
         Action    = "sts:AssumeRole"
         Principal = {
-          AWS = "vpc-flow-logs.amazonaws.com"
+          Service = "vpc-flow-logs.amazonaws.com"
         }
         Effect    = "Allow"
         Sid       = ""
