@@ -67,7 +67,6 @@ resource "aws_iam_role_policy_attachment" "attach_flow_logs_policy" {
 resource "aws_flow_log" "example" {
   traffic_type = "ALL"
   vpc_id = aws_vpc.vpc.id
-  log_format = "AWS::EC2::FlowLog"
   iam_role_arn = aws_iam_role.vpc_flow_logs_role.arn
   log_destination_type = "s3"
   log_destination = "arn:aws:s3:::vpc-flowlogs-s3-test"
