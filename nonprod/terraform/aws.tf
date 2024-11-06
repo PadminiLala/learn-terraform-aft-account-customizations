@@ -2,7 +2,7 @@
 module "vpc" {
   source        = "../../modules/"
   network_view     = "default"
-  container_cidr   = "10.117.1.0/24"
+  container_cidr   = "10.117.2.0/24"
   container_comment = "tf IPv4 network container - this is VPC CIDR"
   ext_attrs        = var.ext_attrs
 }
