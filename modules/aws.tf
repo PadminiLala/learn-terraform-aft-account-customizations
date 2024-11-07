@@ -25,53 +25,53 @@ resource "aws_subnet" "subnet" {
 output "vpc_id" {
   value = aws_vpc.vpc.id
 }
-resource "aws_iam_role" "vpc_flow_logs_role" {
-  name = "vpc_flow_logs_role"
+# resource "aws_iam_role" "vpc_flow_logs_role" {
+#   name = "vpc_flow_logs_role"
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action    = "sts:AssumeRole"
-        Principal = {
-          Service = "vpc-flow-logs.amazonaws.com"
-        }
-        Effect    = "Allow"
-        Sid       = ""
-      },
-    ]
-  })
-}
+#   assume_role_policy = jsonencode({
+#     Version = "2012-10-17"
+#     Statement = [
+#       {
+#         Action    = "sts:AssumeRole"
+#         Principal = {
+#           Service = "vpc-flow-logs.amazonaws.com"
+#         }
+#         Effect    = "Allow"
+#         Sid       = ""
+#       },
+#     ]
+#   })
+# }
 
-resource "aws_iam_policy" "s3_access_policy" {
-  name        = "FlowLogsS3Access"
-  description = "Policy for VPC Flow Logs to write to S3 bucket"
+# resource "aws_iam_policy" "s3_access_policy" {
+#   name        = "FlowLogsS3Access"
+#   description = "Policy for VPC Flow Logs to write to S3 bucket"
 
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = "s3:*"
-        Resource = "arn:aws:s3:::vpc-flowlogs-s3-test/*"
-      },
-    ]
-  })
-}
+#   policy = jsonencode({
+#     Version = "2012-10-17"
+#     Statement = [
+#       {
+#         Effect = "Allow"
+#         Action = "s3:*"
+#         Resource = "arn:aws:s3:::vpc-flowlogs-s3-test/*"
+#       },
+#     ]
+#   })
+# }
 
-resource "aws_iam_role_policy_attachment" "attach_flow_logs_policy" {
-  role       = aws_iam_role.vpc_flow_logs_role.name
-  policy_arn = aws_iam_policy.s3_access_policy.arn
-}
+# resource "aws_iam_role_policy_attachment" "attach_flow_logs_policy" {
+#   role       = aws_iam_role.vpc_flow_logs_role.name
+#   policy_arn = aws_iam_policy.s3_access_policy.arn
+# }
 
-resource "aws_flow_log" "example" {
-  traffic_type = "ALL"
-  vpc_id = aws_vpc.vpc.id
-  # iam_role_arn = aws_iam_role.vpc_flow_logs_role.arn
-  log_destination_type = "s3"
-  log_destination = "arn:aws:s3:::vpc-flowlogs-s3-test"
-  destination_options {
-    file_format        = "plain-text"
-    per_hour_partition = true
-  }
-}
+# resource "aws_flow_log" "example" {
+#   traffic_type = "ALL"
+#   vpc_id = aws_vpc.vpc.id
+#   # iam_role_arn = aws_iam_role.vpc_flow_logs_role.arn
+#   log_destination_type = "s3"
+#   log_destination = "arn:aws:s3:::vpc-flowlogs-s3-test"
+#   destination_options {
+#     file_format        = "plain-text"
+#     per_hour_partition = true
+#   }
+# }
