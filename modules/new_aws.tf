@@ -1,6 +1,8 @@
 # Create a Virtual Private Cloud
 resource "aws_vpc" "vpc" {
   cidr_block = "10.117.0.0/24"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
   tags = {
     Name = "tf-vpc"
   }
@@ -47,6 +49,10 @@ resource "aws_vpc_dhcp_options_association" "example" {
   vpc_id          = aws_vpc.vpc.id
   dhcp_options_id = aws_vpc_dhcp_options.example.id
 }
+# Create an Internet Gateway (for public internet access)
+resource "aws_internet_gateway" "example" {
+  vpc_id = aws_vpc.vpc.id
+}
 # Creating a Route Table
 resource "aws_route_table" "example" {
   vpc_id = aws_vpc.vpc.id
@@ -56,15 +62,26 @@ resource "aws_route_table" "example" {
     cidr_block = "0.0.0.0/0"         # This allows internet traffic
     gateway_id = aws_internet_gateway.example.id
   }
-  
-  # You can define more routes if needed
-  # Example: Private route to a VPN gateway, etc.
+
+}
+resource "aws_guardduty_detector" "main-detector" {
+  enable                       = true
+  finding_publishing_frequency = "ONE_HOUR"
 }
 
-# Create an Internet Gateway (for public internet access)
-resource "aws_internet_gateway" "example" {
-  vpc_id = aws_vpc.vpc.id
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 variable "container_cidr" {
