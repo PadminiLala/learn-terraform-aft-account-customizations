@@ -66,11 +66,7 @@ resource "aws_internet_gateway" "example" {
   vpc_id = aws_vpc.vpc.id
 }
 
-# Associate Route Table with Subnet
-resource "aws_route_table_association" "example" {
-  subnet_id      = aws_subnet.example.id
-  route_table_id = aws_route_table.example.id
-}
+
 variable "container_cidr" {
   description = "The CIDR for the IPv4 network container"
   type        = string
