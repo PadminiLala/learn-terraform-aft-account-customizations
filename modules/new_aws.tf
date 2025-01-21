@@ -1,6 +1,6 @@
 # Create a Virtual Private Cloud
 resource "aws_vpc" "vpc" {
-  cidr_block = infoblox_ipv4_network_container.IPv4_nw_c.cidr
+  cidr_block = "10.117.0.0/24"
   tags = {
     Name = "tf-vpc"
   }
