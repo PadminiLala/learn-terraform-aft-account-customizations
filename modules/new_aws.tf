@@ -40,20 +40,20 @@ locals {
 }
 
 
-# resource "aws_vpc_dhcp_options" "example" {
-#   domain_name_servers = ["10.0.0.2", "AmazonProvidedDNS"]  # Custom DNS server
-#   domain_name         = "aftterraform.com"                      # Custom domain
-# }
+resource "aws_vpc_dhcp_options" "example" {
+  domain_name_servers = ["10.0.0.2", "AmazonProvidedDNS"]  # Custom DNS server
+  domain_name         = "aftterraform.com"                      # Custom domain
+}
 
-# resource "aws_vpc_dhcp_options_association" "example" {
-#   vpc_id          = aws_vpc.vpc.id
-#   dhcp_options_id = aws_vpc_dhcp_options.example.id
-# }
-# # Create an Internet Gateway (for public internet access)
-# resource "aws_internet_gateway" "example" {
-#   vpc_id = aws_vpc.vpc.id
-# }
-# # Creating a Route Table
+resource "aws_vpc_dhcp_options_association" "example" {
+  vpc_id          = aws_vpc.vpc.id
+  dhcp_options_id = aws_vpc_dhcp_options.example.id
+}
+# Create an Internet Gateway (for public internet access)
+resource "aws_internet_gateway" "example" {
+  vpc_id = aws_vpc.vpc.id
+}
+# Creating a Route Table
 resource "aws_route_table" "example" {
   vpc_id = aws_vpc.vpc.id
 
