@@ -40,37 +40,30 @@ locals {
 }
 
 
-resource "aws_vpc_dhcp_options" "example" {
-  domain_name_servers = ["10.0.0.2", "AmazonProvidedDNS"]  # Custom DNS server
-  domain_name         = "aftterraform.com"                      # Custom domain
-}
+# resource "aws_vpc_dhcp_options" "example" {
+#   domain_name_servers = ["10.0.0.2", "AmazonProvidedDNS"]  # Custom DNS server
+#   domain_name         = "aftterraform.com"                      # Custom domain
+# }
 
-resource "aws_vpc_dhcp_options_association" "example" {
-  vpc_id          = aws_vpc.vpc.id
-  dhcp_options_id = aws_vpc_dhcp_options.example.id
-}
-# Create an Internet Gateway (for public internet access)
-resource "aws_internet_gateway" "example" {
-  vpc_id = aws_vpc.vpc.id
-}
-# Creating a Route Table
-resource "aws_route_table" "example" {
-  vpc_id = aws_vpc.vpc.id
+# resource "aws_vpc_dhcp_options_association" "example" {
+#   vpc_id          = aws_vpc.vpc.id
+#   dhcp_options_id = aws_vpc_dhcp_options.example.id
+# }
+# # Create an Internet Gateway (for public internet access)
+# resource "aws_internet_gateway" "example" {
+#   vpc_id = aws_vpc.vpc.id
+# }
+# # Creating a Route Table
+# resource "aws_route_table" "example" {
+#   vpc_id = aws_vpc.vpc.id
 
-  # Define routes (example: route to the internet gateway)
-  route {
-    cidr_block = "0.0.0.0/0"         # This allows internet traffic
-    gateway_id = aws_internet_gateway.example.id
-  }
+#   # Define routes (example: route to the internet gateway)
+#   route {
+#     cidr_block = "0.0.0.0/0"         # This allows internet traffic
+#     gateway_id = aws_internet_gateway.example.id
+#   }
 
-}
-resource "aws_guardduty_detector" "main-detector" {
-  enable                       = true
-  finding_publishing_frequency = "ONE_HOUR"
-}
-
-
-
+# }
 
 
 
