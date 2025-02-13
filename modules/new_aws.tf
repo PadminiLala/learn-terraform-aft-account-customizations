@@ -54,16 +54,16 @@ locals {
 #   vpc_id = aws_vpc.vpc.id
 # }
 # # Creating a Route Table
-# resource "aws_route_table" "example" {
-#   vpc_id = aws_vpc.vpc.id
+resource "aws_route_table" "example" {
+  vpc_id = aws_vpc.vpc.id
 
-#   # Define routes (example: route to the internet gateway)
-#   route {
-#     cidr_block = "0.0.0.0/0"         # This allows internet traffic
-#     gateway_id = aws_internet_gateway.example.id
-#   }
+  # Define routes (example: route to the internet gateway)
+  route {
+    cidr_block = "0.0.0.0/0"         # This allows internet traffic
+    gateway_id = aws_internet_gateway.example.id
+  }
 
-# }
+}
 
 
 
